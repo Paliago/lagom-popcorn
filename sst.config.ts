@@ -5,7 +5,7 @@ export default {
   config(_input) {
     return {
       name: "lagom-popcorn",
-      region: "us-east-1",
+      region: "eu-north-1",
     };
   },
   stacks(app) {
