@@ -10,6 +10,7 @@ export default defineConfig({
   adapter: aws(),
   integrations: [
     auth({
+      secret: Config.AUTH_SECRET,
       providers: [
         DiscordProvider({
           clientId: Config.DISCORD_CLIENT_ID,
