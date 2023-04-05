@@ -1,0 +1,27 @@
+name: deploy prod
+run-name: Deploy to Prod
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy-prod:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-region: eu-north-1
+          role-to-assume: ${{ secrets.CI_ROLE }}
+          role-session-name: LagomPopcornSession
+      - name: Install, build and deploy
+        run: |
+          yarn --frozen-lockfile
+          yarn sst deploy --stage prod

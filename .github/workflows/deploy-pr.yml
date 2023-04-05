@@ -1,0 +1,27 @@
+name: deploy pr
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-region: eu-north-1
+          role-to-assume: ${{ secrets.CI_ROLE }}
+          role-session-name: LagomPopcornSession
+      - name: Install, build & deploy
+        run: |
+          yarn node --version
+          yarn --version
+          yarn --frozen-lockfile
+          yarn typecheck
+          yarn sst deploy --stage pr-${{ github.event.pull_request.id }}
