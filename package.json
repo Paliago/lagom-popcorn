@@ -19,7 +19,8 @@
     "@tsconfig/node18": "^1.0.1"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "lagom-web"
   ],
   "volta": {
     "node": "18.15.0"
