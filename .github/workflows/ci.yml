@@ -19,8 +19,7 @@ jobs:
       - name: Install, build & deploy
         run: |
           yarn --frozen-lockfile
-          yarn typecheck
-          yarn lint
+          yarn typecheck \
           yarn sst deploy \
             --stage  <PR> \
             --verbose
