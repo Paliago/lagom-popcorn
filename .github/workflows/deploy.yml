@@ -23,7 +23,7 @@ jobs:
           role-session-name: LagomPopcornSession
       - name: Install and deploy
         run: |
-          yarn --frozen-lockfile --ignore-scripts
+          yarn --frozen-lockfile
           yarn typecheck
           yarn lint
           yarn sst deploy \
