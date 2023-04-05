@@ -7,42 +7,25 @@ import { getSession } from "auth-astro/server";
 const session = await getSession(Astro.request);
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="En Lagom Popcorn.">
   <main>
-    <h1>Welcome to <span class="text-gradient">Astro</span></h1>
+    <h1>En Lagom <span class="text-gradient">Popcorn</span></h1>
     <p class="instructions">
-      To get started, open the directory <code>src/pages</code> in your project.<br
-      />
-      <strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
+      <strong>Testa gärna:</strong> de snygga login knapparna under här.
+      <br />
+      {
+        session ? (
+          <p>
+            Welcome <strong>{session.user?.email}</strong>
+          </p>
+        ) : (
+          <p>Not logged in</p>
+        )
+      }
     </p>
 
     <SignIn provider="github">Login</SignIn>
     <SignOut>Log Out</SignOut>
-
-    {session ? <p>Welcome {session.user?.email}</p> : <p>Not logged in</p>}
-
-    <ul role="list" class="link-card-grid">
-      <Card
-        href="https://docs.astro.build/"
-        title="Documentation"
-        body="Learn how Astro works and explore the official API docs."
-      />
-      <Card
-        href="https://astro.build/integrations/"
-        title="Integrations"
-        body="Supercharge your project with new frameworks and libraries."
-      />
-      <Card
-        href="https://astro.build/themes/"
-        title="Themes"
-        body="Explore a galaxy of community-built starter themes."
-      />
-      <Card
-        href="https://astro.build/chat/"
-        title="Community"
-        body="Come say hi to our amazing Discord community. ❤️"
-      />
-    </ul>
   </main>
 </Layout>
 
