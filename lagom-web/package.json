@@ -1,6 +1,7 @@
 {
   "name": "lagom-web",
   "type": "module",
+  "license": "MIT",
   "version": "0.0.1",
   "scripts": {
     "dev": "sst bind astro dev",
