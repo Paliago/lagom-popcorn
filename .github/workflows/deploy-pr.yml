@@ -1,5 +1,7 @@
 name: deploy pr
-on: [pull_request]
+on:
+  pull_request:
+    types: [opened, reopened]
 
 permissions:
   id-token: write
@@ -20,6 +22,4 @@ jobs:
         run: |
           yarn --frozen-lockfile
           yarn typecheck
-          yarn sst deploy \
-            --stage pr-${{ github.event.pull_request.id }} \
-            --verbose
+          yarn sst deploy --stage pr-${{ github.event.pull_request.id }}

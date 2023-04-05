@@ -1,17 +1,14 @@
-name: deploy prod
-run-name: Deploy to Prod
+name: remove pr deploy
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+  pull_request:
+    types: closed
 
 permissions:
   id-token: write
   contents: read
 
 jobs:
-  deploy-prod:
+  remove-pr:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -21,7 +18,7 @@ jobs:
           aws-region: eu-north-1
           role-to-assume: ${{ secrets.CI_ROLE }}
           role-session-name: LagomPopcornSession
-      - name: Install, build and deploy
+      - name: Install & remove stack
         run: |
           yarn --frozen-lockfile
-          yarn sst deploy --stage prod
+          yarn sst remove --stage pr-${{ github.event.pull_request.id }}
