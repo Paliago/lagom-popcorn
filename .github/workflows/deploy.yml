@@ -1,4 +1,4 @@
-name: deploy
+name: deploy prod
 run-name: Deploy to Prod
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  deploy:
+  deploy-prod:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -23,9 +23,7 @@ jobs:
           role-session-name: LagomPopcornSession
       - name: Install and deploy
         run: |
-          yarn \
-            --frozen-lockfile \
-            --ignore-scripts
+          yarn --frozen-lockfile --ignore-scripts
           yarn typecheck
           yarn lint
           yarn sst deploy \
